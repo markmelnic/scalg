@@ -1,7 +1,5 @@
 
-import os
 import csv
-
 
 if __name__ == '__main__':
     fileName = "input.csv"
@@ -9,64 +7,56 @@ if __name__ == '__main__':
     # read file contents
     with open(fileName, mode="r", newline='') as csvFile:
         csvReader = csv.reader(csvFile)
-        data = list(csvReader)
-        data.pop(0)
-        csvFile.close()
+        source_data = list(csvReader)
 
     # getting data
-    allReg = []
-    allPrices = []
-    allMiles = []
-    for dat in data:
-        allReg.append(int(dat[0]))
-        allPrices.append(int(dat[1]))
-        allMiles.append(int(dat[2]))
-
+    data_lists = []
+    for item in source_data:
+        for i in range(len(item)):
+            try:
+                data_lists[i].append(float(item[i]))
+            except:
+                data_lists.append([])
+                data_lists[i].append(float(item[i]))
+            
+    height = 0
+    score_lists = []
     # calculating price score
-    minPrice = min(allPrices)
-    maxPrice = max(allPrices)
+    for lit in data_lists:
+        mind = min(lit)
+        maxd = max(lit)
 
-    multiplier = 3.333
-    
-    priceScore = []
-    for price in allPrices:
-        try:
-            priceScore.append((1 - ((price - minPrice) / (maxPrice - minPrice))) * multiplier)
-        except:
-            priceScore.append(1)
+        multiplier = 1
+        
+        if height == 0:
+            score = []
+            for item in lit:
+                try:
+                    score.append((1 - ((item - mind) / (maxd - mind))) * multiplier)
+                except:
+                    score.append(1)
+        else:
+            for item in lit:
+                try:
+                    score.append(((item - mind) / (maxd - mind)) * multiplier)
+                except Exception as e:
+                    score.append(0)
+                    
+        score_lists.append(score)
 
-    # reg score
-    minReg = min(allReg)
-    maxReg = max(allReg)
-    
-    regScore = []
-    for reg in allReg:
-        try:
-            regScore.append(((reg - minReg) / (maxReg - minReg)) * multiplier)
-        except Exception as e:
-            regScore.append(0)
-
-    # mileage score
-    minMiles = min(allMiles)
-    maxMiles = max(allMiles)
-
-    milScore = []
-    milTempScore = []
-    for mil in allMiles:
-        try:
-            milScore.append((1 - (mil - minMiles) / (maxMiles - minMiles)) * multiplier)
-        except:
-            milScore.append(1)
-
-
-    # final score
-    fScore = []
-    for pricesc, mileagesc, regsc in zip(priceScore, milScore, regScore):
-        fScore.append(pricesc + mileagesc + regsc)
-
+    #final score
+    final_score = []
+    for s in score_lists[0]:
+        final_score.append(0)
+    for s_list in score_lists:
+        for i in range(len(s_list)):
+            final_score[i] = final_score[i] + s_list[i]
     
     with open(fileName, 'w', encoding="utf-8", newline='') as csvFile:
         csvWriter = csv.writer(csvFile)
-        for dat, score in zip(data, fScore):
-            csvWriter.writerow([dat[0], dat[1], dat[2], score])
+        
+        for i in range(len(source_data)):
+            source_data[i].append(final_score[i])
+            csvWriter.writerow(source_data[i])
+            
         csvFile.close()
