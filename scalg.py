@@ -1,13 +1,17 @@
 
-import csv
-
-def score(source_data, height):
+def score(source_data, weights, *args):
     '''
-    height
-    description - list where each value corresponds to each data column
+    int list - weights
     possible values - 0 / 1
-    0 if lower values have higher priority
-    1 if higher values have higher priority
+    0 if lower values have higher weight in the data set
+    1 if higher values have higher weight in the data set
+    ==========
+    Optional arguments:
+    str - "score_lists"
+    get a list with all the scores for each piece of data
+    
+    str - "scores"
+    get only the final scores for each data set
     '''
     
     # getting data
@@ -22,38 +26,49 @@ def score(source_data, height):
             
     score_lists = []
     # calculating price score
-    for i in range(len(data_lists)):
-        mind = min(data_lists[i])
-        maxd = max(data_lists[i])
+    for dlist, weight in zip(data_lists, weights):
+        mind = min(dlist)
+        maxd = max(dlist)
         
         score = []
-        if height[i] == 0:
-            for item in data_lists[i]:
+        if weight == 0:
+            for item in dlist:
                 try:
                     score.append(1 - ((item - mind) / (maxd - mind)))
                 except:
                     score.append(1)
    
-        elif height[i] == 1:
-            for item in data_lists[i]:
+        elif weight == 1:
+            for item in dlist:
                 try:
                     score.append((item - mind) / (maxd - mind))
                 except Exception as e:
                     score.append(0)
     
         else:
-            raise Exception("Invalid height provided")
+            raise Exception("Invalid weight of %f provided" %(weight))
         
         score_lists.append(score)
-
-    #final score
+    
+    # return score lists
+    if "score_lists" in args:
+        return score_lists
+    
+    # initialize final scores
     final_scores = []
-    for s in score_lists[0]:
+    for i in range(len(score_lists[0])):
         final_scores.append(0)
-    for s_list in score_lists:
-        for i in range(len(s_list)):
-            final_scores[i] = final_scores[i] + s_list[i]
+        
+    # generate final scores
+    for slist in score_lists:
+        for i in range(len(slist)):
+            final_scores[i] = final_scores[i] + slist[i]
             
+    # return only scores
+    if "scores" in args:
+        return final_scores
+    
+    # append scores to source data
     for i in range(len(source_data)):
         source_data[i].append(final_scores[i])
 

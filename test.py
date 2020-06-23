@@ -27,4 +27,4 @@ def write_data(filename, source_data, final_scores):
 if __name__=='__main__':
     dt = read_csv("input.csv")
     sc = scalg.score(dt, [1, 0, 0, 1])
-    write_data("input.csv", dt, sc)
+    #write_data("input.csv", dt, sc)
