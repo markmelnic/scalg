@@ -1,5 +1,6 @@
 
-def score(source_data, weights, *args):
+def score(source_data : list, weights : list, *args):
+
     '''
     int list - weights
     possible values - 0 / 1
@@ -9,67 +10,65 @@ def score(source_data, weights, *args):
     Optional arguments:
     str - "score_lists"
     get a list with all the scores for each piece of data
-    
+
     str - "scores"
     get only the final scores for each data set
     '''
-    
+
     # getting data
     data_lists = []
     for item in source_data:
         for i in range(len(item)):
             try:
                 data_lists[i].append(float(item[i]))
-            except:
+            except IndexError:
                 data_lists.append([])
                 data_lists[i].append(float(item[i]))
-            
+
     score_lists = []
     # calculating price score
     for dlist, weight in zip(data_lists, weights):
         mind = min(dlist)
         maxd = max(dlist)
-        
+
         score = []
         if weight == 0:
             for item in dlist:
                 try:
                     score.append(1 - ((item - mind) / (maxd - mind)))
-                except:
+                except ZeroDivisionError:
                     score.append(1)
-   
+
         elif weight == 1:
             for item in dlist:
                 try:
                     score.append((item - mind) / (maxd - mind))
-                except Exception as e:
+                except ZeroDivisionError:
                     score.append(0)
-    
+
         else:
-            raise Exception("Invalid weight of %f provided" %(weight))
-        
+            raise Exception("Invalid weight of %f provided" % (weight))
+
         score_lists.append(score)
-    
+
     # return score lists
     if "score_lists" in args:
         return score_lists
-    
+
     # initialize final scores
-    final_scores = []
-    for i in range(len(score_lists[0])):
-        final_scores.append(0)
-        
+    final_scores = [0 for i in range(len(score_lists[0]))]
+
     # generate final scores
-    for slist in score_lists:
-        for i in range(len(slist)):
-            final_scores[i] = final_scores[i] + slist[i]
-            
+    for i, slist in enumerate(score_lists):
+        for j, ele in enumerate(slist):
+            final_scores[j] = final_scores[j] + ele
+
     # return only scores
     if "scores" in args:
         return final_scores
-    
+
     # append scores to source data
-    for i in range(len(source_data)):
-        source_data[i].append(final_scores[i])
+    for i, ele in enumerate(final_scores):
+        source_data[i].append(ele)
 
     return source_data
