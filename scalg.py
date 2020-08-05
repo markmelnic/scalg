@@ -1,5 +1,5 @@
 
-def score(source_data : list, weights : list, *args):
+def score(source_data : list, weights : list, *args) -> list:
 
     '''
     int list - weights
@@ -47,7 +47,7 @@ def score(source_data : list, weights : list, *args):
                     score.append(0)
 
         else:
-            raise Exception("Invalid weight of %f provided" % (weight))
+            raise ValueError("Invalid weight of %f provided" % (weight))
 
         score_lists.append(score)
 
