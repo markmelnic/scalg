@@ -22,8 +22,8 @@ def write_data(filename, source_data, final_scores):
     with open(filename, 'w', encoding="utf-8", newline='') as csvFile:
         csvWriter = csv.writer(csvFile)
 
-        for i in range(len(source_data)):
-            csvWriter.writerow(source_data[i])
+        for sdat in (source_data):
+            csvWriter.writerow(sdat)
 
         csvFile.close()
 

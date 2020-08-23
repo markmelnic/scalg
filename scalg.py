@@ -18,15 +18,15 @@ def score(source_data : list, weights : list, *args) -> list:
     # getting data
     data_lists = []
     for item in source_data:
-        for i in range(len(item)):
+        for i, ind in enumerate(item):
             try:
-                data_lists[i].append(float(item[i]))
+                data_lists[i].append(float(ind))
             except IndexError:
                 data_lists.append([])
-                data_lists[i].append(float(item[i]))
+                data_lists[i].append(float(ind))
 
-    score_lists = []
     # calculating price score
+    score_lists = []
     for dlist, weight in zip(data_lists, weights):
         mind = min(dlist)
         maxd = max(dlist)
