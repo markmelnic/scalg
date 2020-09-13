@@ -3,6 +3,7 @@
 This is an algorithm which works based on a range based procentual proximity principle. Initially it was developed for a personal project, however later I found out it is a form of Newton's method used in statistics to solve maximum likelihood equations numerically.
 
 scalg.score:
+
     Args:
         source_data (list): Data set to process.
         weights (list): Weights corresponding to each column from the data set.
@@ -20,6 +21,7 @@ scalg.score:
         list: Source data with the score of the set appended at as the last element.
 
 scalg.score_columns:
+
     Args:
         source_data (list): Data set to process.
         weights (list): Weights corresponding to each column from the data set.
