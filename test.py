@@ -1,7 +1,6 @@
 
-import csv
+import csv, unittest
 import scalg
-
 
 def read_csv(filename):
 
@@ -13,23 +12,27 @@ def read_csv(filename):
         csvReader = csv.reader(csvFile)
         return list(csvReader)
 
+class Scalg(unittest.TestCase):
+    def test_scalg_default(self):
+        data = read_csv('sample.csv')
+        scalg.score(data, [1, 0, 0, 1])
 
-def write_data(filename, source_data, final_scores):
+    def test_scalg_scores(self):
+        data = read_csv('sample.csv')
+        scalg.score(data, [1, 0, 0, 1], 'scores')
 
-    if ".csv" not in filename:
-        filename = str(filename) + ".csv"
+    def test_scalg_score_lists(self):
+        data = read_csv('sample.csv')
+        scalg.score(data, [1, 0, 0, 1], 'score_lists')
 
-    with open(filename, 'w', encoding="utf-8", newline='') as csvFile:
-        csvWriter = csv.writer(csvFile)
+    def test_score_columns(self):
+        data = read_csv('sample.csv')
+        scalg.score_columns(data, [1, 3], [1, 0, 0, 1])
 
-        for sdat in (source_data):
-            csvWriter.writerow(sdat)
+    def test_score_columns_scores(self):
+        data = read_csv('sample.csv')
+        scalg.score_columns(data, [1, 3], [1, 0, 0, 1], 'scores')
 
-        csvFile.close()
-
-
-if __name__ == '__main__':
-
-    dt = read_csv("input.csv")
-    sc = scalg.score(dt, [1, 0, 0, 1])
-    # write_data("input.csv", dt, sc)
+    def test_score_columns_score_lists(self):
+        data = read_csv('sample.csv')
+        scalg.score_columns(data, [1, 3], [1, 0, 0, 1], 'score_lists')
