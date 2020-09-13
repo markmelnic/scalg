@@ -1,29 +1,34 @@
 
 def score(source_data : list, weights : list, *args) -> list:
+    """Analyse data file using a range based procentual proximity
+    algorithm and calculate the linear maximum likelihood estimation.
 
-    '''
-    int list - weights
-    possible values - 0 / 1
-    0 if lower values have higher weight in the data set
-    1 if higher values have higher weight in the data set
-    ==========
-    Optional arguments:
-    str - "score_lists"
-    get a list with all the scores for each piece of data
+    Args:
+        source_data (list): Data set to process.
+        weights (list): Weights corresponding to each column from the data set.
+            0 if lower values have higher weight in the data set,
+            1 if higher values have higher weight in the data set
 
-    str - "scores"
-    get only the final scores for each data set
-    '''
+    Optional args:
+        "score_lists" (str): Returns a list with lists of each column scores.
+        "scores" (str): Returns only the final scores.
+
+    Raises:
+        ValueError: Weights can only be either 0 or 1 (int)
+
+    Returns:
+        list: Source data with the score of the set appended at as the last element.
+    """
 
     # getting data
     data_lists = []
     for item in source_data:
-        for i, ind in enumerate(item):
+        for i, val in enumerate(item):
             try:
-                data_lists[i].append(float(ind))
+                data_lists[i].append(float(val))
             except IndexError:
                 data_lists.append([])
-                data_lists[i].append(float(ind))
+                data_lists[i].append(float(val))
 
     # calculating price score
     score_lists = []
@@ -72,3 +77,35 @@ def score(source_data : list, weights : list, *args) -> list:
         source_data[i].append(ele)
 
     return source_data
+
+def score_columns(source_data : list, columns : list, weights : list, *args) -> list:
+    """Analyse data file using a range based procentual proximity
+    algorithm and calculate the linear maximum likelihood estimation.
+
+    Args:
+        source_data (list): Data set to process.
+        weights (list): Weights corresponding to each column from the data set.
+            0 if lower values have higher weight in the data set,
+            1 if higher values have higher weight in the data set
+        columns (list): Indexes of the source_data columns to be scored.
+
+    Optional args:
+        "score_lists" (str): Returns a list with lists of each column scores.
+        "scores" (str): Returns only the final scores.
+
+    Raises:
+        ValueError: Weights can only be either 0 or 1 (int)
+
+    Returns:
+        list: Source data with the score of the set appended at as the last element.
+    """
+
+    temp_data = []
+    for item in source_data:
+        temp_data.append([item[c] for c in columns])
+
+    if "scores" in args:
+        return score(temp_data, weights, 'scores')
+
+    if "score_lists" in args:
+        return score(temp_data, weights, 'score_lists')
