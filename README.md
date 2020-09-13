@@ -2,14 +2,37 @@
 
 This is an algorithm which works based on a range based procentual proximity principle. Initially it was developed for a personal project, however later I found out it is a form of Newton's method used in statistics to solve maximum likelihood equations numerically.
 
-Right now the main method is score(source_data, weights, *args), where source_data is what you pass into the algorithm to compare. It will compare each data list within itself, doing that for each list, then add up the scores of each element from each list with the same index.
+scalg.score:
+    Args:
+        source_data (list): Data set to process.
+        weights (list): Weights corresponding to each column from the data set.
+            0 if lower values have higher weight in the data set,
+            1 if higher values have higher weight in the data set
 
-The weights parameter is an int list with possible values of 0 or 1, where 0 means lower values have higher weight in the data set and 1 means higher values have higher weight in the data set.
+    Optional args:
+        "score_lists" (str): Returns a list with lists of each column scores.
+        "scores" (str): Returns only the final scores.
 
-Other optional arguments are (passed in as a string):
+    Raises:
+        ValueError: Weights can only be either 0 or 1 (int)
 
-    str - "score_lists"
-    get a list with all the scores for each piece of data
-    
-    str - "scores"
-    get only the final scores for each data set
+    Returns:
+        list: Source data with the score of the set appended at as the last element.
+
+scalg.score_columns:
+    Args:
+        source_data (list): Data set to process.
+        weights (list): Weights corresponding to each column from the data set.
+            0 if lower values have higher weight in the data set,
+            1 if higher values have higher weight in the data set
+        columns (list): Indexes of the source_data columns to be scored.
+
+    Optional args:
+        "score_lists" (str): Returns a list with lists of each column scores.
+        "scores" (str): Returns only the final scores.
+
+    Raises:
+        ValueError: Weights can only be either 0 or 1 (int)
+
+    Returns:
+        list: Source data with the score of the set appended at as the last element.
