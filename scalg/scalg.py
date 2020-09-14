@@ -1,111 +1,112 @@
 
-def score(source_data : list, weights : list, *args) -> list:
-    """Analyse data file using a range based procentual proximity
-    algorithm and calculate the linear maximum likelihood estimation.
+class Scalg:
+    def score(self, source_data : list, weights : list, *args) -> list:
+        """Analyse data file using a range based procentual proximity
+        algorithm and calculate the linear maximum likelihood estimation.
 
-    Args:
-        source_data (list): Data set to process.
-        weights (list): Weights corresponding to each column from the data set.
-            0 if lower values have higher weight in the data set,
-            1 if higher values have higher weight in the data set
+        Args:
+            source_data (list): Data set to process.
+            weights (list): Weights corresponding to each column from the data set.
+                0 if lower values have higher weight in the data set,
+                1 if higher values have higher weight in the data set
 
-    Optional args:
-        "score_lists" (str): Returns a list with lists of each column scores.
-        "scores" (str): Returns only the final scores.
+        Optional args:
+            "score_lists" (str): Returns a list with lists of each column scores.
+            "scores" (str): Returns only the final scores.
 
-    Raises:
-        ValueError: Weights can only be either 0 or 1 (int)
+        Raises:
+            ValueError: Weights can only be either 0 or 1 (int)
 
-    Returns:
-        list: Source data with the score of the set appended at as the last element.
-    """
+        Returns:
+            list: Source data with the score of the set appended at as the last element.
+        """
 
-    # getting data
-    data_lists = []
-    for item in source_data:
-        for i, val in enumerate(item):
-            try:
-                data_lists[i].append(float(val))
-            except IndexError:
-                data_lists.append([])
-                data_lists[i].append(float(val))
-
-    # calculating price score
-    score_lists = []
-    for dlist, weight in zip(data_lists, weights):
-        mind = min(dlist)
-        maxd = max(dlist)
-
-        score = []
-        if weight == 0:
-            for item in dlist:
+        # getting data
+        data_lists = []
+        for item in source_data:
+            for i, val in enumerate(item):
                 try:
-                    score.append(1 - ((item - mind) / (maxd - mind)))
-                except ZeroDivisionError:
-                    score.append(1)
+                    data_lists[i].append(float(val))
+                except IndexError:
+                    data_lists.append([])
+                    data_lists[i].append(float(val))
 
-        elif weight == 1:
-            for item in dlist:
-                try:
-                    score.append((item - mind) / (maxd - mind))
-                except ZeroDivisionError:
-                    score.append(0)
+        # calculating price score
+        score_lists = []
+        for dlist, weight in zip(data_lists, weights):
+            mind = min(dlist)
+            maxd = max(dlist)
 
-        else:
-            raise ValueError("Invalid weight of %f provided" % (weight))
+            score = []
+            if weight == 0:
+                for item in dlist:
+                    try:
+                        score.append(1 - ((item - mind) / (maxd - mind)))
+                    except ZeroDivisionError:
+                        score.append(1)
 
-        score_lists.append(score)
+            elif weight == 1:
+                for item in dlist:
+                    try:
+                        score.append((item - mind) / (maxd - mind))
+                    except ZeroDivisionError:
+                        score.append(0)
 
-    # return score lists
-    if "score_lists" in args:
-        return score_lists
+            else:
+                raise ValueError("Invalid weight of %f provided" % (weight))
 
-    # initialize final scores
-    final_scores = [0 for i in range(len(score_lists[0]))]
+            score_lists.append(score)
 
-    # generate final scores
-    for i, slist in enumerate(score_lists):
-        for j, ele in enumerate(slist):
-            final_scores[j] = final_scores[j] + ele
+        # return score lists
+        if "score_lists" in args:
+            return score_lists
 
-    # return only scores
-    if "scores" in args:
-        return final_scores
+        # initialize final scores
+        final_scores = [0 for i in range(len(score_lists[0]))]
 
-    # append scores to source data
-    for i, ele in enumerate(final_scores):
-        source_data[i].append(ele)
+        # generate final scores
+        for i, slist in enumerate(score_lists):
+            for j, ele in enumerate(slist):
+                final_scores[j] = final_scores[j] + ele
 
-    return source_data
+        # return only scores
+        if "scores" in args:
+            return final_scores
 
-def score_columns(source_data : list, columns : list, weights : list, *args) -> list:
-    """Analyse data file using a range based procentual proximity
-    algorithm and calculate the linear maximum likelihood estimation.
+        # append scores to source data
+        for i, ele in enumerate(final_scores):
+            source_data[i].append(ele)
 
-    Args:
-        source_data (list): Data set to process.
-        weights (list): Weights corresponding to each column from the data set.
-            0 if lower values have higher weight in the data set,
-            1 if higher values have higher weight in the data set
-        columns (list): Indexes of the source_data columns to be scored.
+        return source_data
 
-    Optional args:
-        "score_lists" (str): Returns a list with lists of each column scores.
-        "scores" (str): Returns only the final scores.
+    def score_columns(self, source_data : list, columns : list, weights : list, *args) -> list:
+        """Analyse data file using a range based procentual proximity
+        algorithm and calculate the linear maximum likelihood estimation.
 
-    Raises:
-        ValueError: Weights can only be either 0 or 1 (int)
+        Args:
+            source_data (list): Data set to process.
+            weights (list): Weights corresponding to each column from the data set.
+                0 if lower values have higher weight in the data set,
+                1 if higher values have higher weight in the data set
+            columns (list): Indexes of the source_data columns to be scored.
 
-    Returns:
-        list: Source data with the score of the set appended at as the last element.
-    """
+        Optional args:
+            "score_lists" (str): Returns a list with lists of each column scores.
+            "scores" (str): Returns only the final scores.
 
-    temp_data = []
-    for item in source_data:
-        temp_data.append([item[c] for c in columns])
+        Raises:
+            ValueError: Weights can only be either 0 or 1 (int)
 
-    if "scores" in args:
-        return score(temp_data, weights, 'scores')
+        Returns:
+            list: Source data with the score of the set appended at as the last element.
+        """
 
-    if "score_lists" in args:
-        return score(temp_data, weights, 'score_lists')
+        temp_data = []
+        for item in source_data:
+            temp_data.append([item[c] for c in columns])
+
+        if "scores" in args:
+            return self.score(temp_data, weights, 'scores')
+
+        if "score_lists" in args:
+            return self.score(temp_data, weights, 'score_lists')

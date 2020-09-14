@@ -27,7 +27,6 @@ setup(
         'Programming Language :: Python :: 3.7'
     ],
     packages=['scalg'],
-    package_dir={'scalg': 'scalg'},
     include_package_data=True,
     project_urls={
         'Source': 'https://github.com/markmelnic/Scoring-Algorithm',
