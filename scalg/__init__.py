@@ -1,1 +1,1 @@
-from scalg import Scalg
+import scalg
