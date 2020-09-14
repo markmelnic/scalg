@@ -8,8 +8,8 @@ def readme():
 
 
 setup(
-    name="Scoring-Algorithm",
-    version="1.0.0",
+    name="scalg",
+    version="0.1",
     description="Analyse data file using a range based procentual proximity algorithm and calculate the linear maximum likelihood estimation.",
     long_description=readme(),
     long_description_content_type="text/markdown",
@@ -18,15 +18,18 @@ setup(
     author_email="commerce.markmelnic@gmail.com",
     license="MIT",
     classifiers=[
+        'Intended Audience :: Developers',
+        'Natural Language :: English',
         "License :: OSI Approved :: MIT License",
-        "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.7",
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7'
     ],
-    packages=["scalg"],
+    packages=['scalg'],
+    package_dir={'scalg': 'scalg'},
     include_package_data=True,
-    install_requires=[],
-    entry_points={
-        "console_scripts": [
-        ]
+    project_urls={
+        'Source': 'https://github.com/markmelnic/Scoring-Algorithm',
     },
 )
