@@ -1,40 +1,66 @@
-# Scoring-Algorithm
 
-This is an algorithm which works based on a range based procentual proximity principle. Initially it was developed for a personal project, however later I found out it is a form of Newton's method used in statistics to solve maximum likelihood equations numerically.
+# Scoring Algorithm (SCALG)
 
-scalg.score:
+This algorithm works based on a percentual range proximity principle. Initially it was developed for a personal project, however later I found out it is a form of Newton's method used in statistics to solve maximum likelihood equations numerically.
 
-    Args:
-        source_data (list): Data set to process.
-        weights (list): Weights corresponding to each column from the data set.
-            0 if lower values have higher weight in the data set,
-            1 if higher values have higher weight in the data set
+## Usage
 
-    Optional args:
-        "score_lists" (str): Returns a list with lists of each column scores.
-        "scores" (str): Returns only the final scores.
+    pip install scalg
 
-    Raises:
-        ValueError: Weights can only be either 0 or 1 (int)
+As of __14 september 2020__ it contains two methods (`score` and `score_columns`) which will be described and demonstrated in the examples below.
 
-    Returns:
-        list: Source data with the score of the set appended at as the last element.
+    import scalg
 
-scalg.score_columns:
+## Examples
 
-    Args:
-        source_data (list): Data set to process.
-        weights (list): Weights corresponding to each column from the data set.
-            0 if lower values have higher weight in the data set,
-            1 if higher values have higher weight in the data set
-        columns (list): Indexes of the source_data columns to be scored.
+This will be the sample dataset used as source_data withing the examples with the corresponding indexes and column weights.
 
-    Optional args:
-        "score_lists" (str): Returns a list with lists of each column scores.
-        "scores" (str): Returns only the final scores.
+    Columns ->  0     1      2      3
+    Weights ->  1     0      0      1
+            1[[2016 ,21999 ,62000  ,181],
+    Sets -> 2 [2013 ,21540 ,89000  ,223],
+            3 [2015 ,18900 ,100000 ,223],
+            4 [2013 ,24200 ,115527 ,223],
+            5 [2016 ,24990 ,47300  ,223]]
 
-    Raises:
-        ValueError: Weights can only be either 0 or 1 (int)
+### scalg.score(source_data : list, weights : list, *args) -> list
 
-    Returns:
-        list: Source data with the score of the set appended at as the last element.
+The output if you pass in source_data and weights:
+
+    [[2016, 21999, 62000,  181, 2.2756757812463335],
+     [2013, 21540, 89000,  223, 1.9553074815952338],
+     [2015, 18900, 100000, 223, 2.894245191297678],
+     [2013, 24200, 115527, 223, 1.1297208538587848],
+     [2016, 24990, 47300,  223, 3.0]]
+
+The output if you pass in source_data, weights and "scores":
+
+    [2.2756757812463335, 1.9553074815952338, 2. 894245191297678, 1.1297208538587848, 3.0]
+
+The output if you pass in source_data, weights and "score_lists":
+
+    [[1.0, 0.0, 0.6666666666666666, 0.0, 1.0]
+     [0.49113300492610834, 0.5665024630541872, 1.0, 0.12972085385878485, 0.0]
+     [0.7845427763202251, 0.38880501854104677, 0.22757852463101114, 0.0, 1.0]
+     [0.0, 1.0, 1.0, 1.0, 1.0]]
+
+### scalg.score_columns(source_data : list, columns : list, weights : list, *args) -> list
+
+Here you may use the same weights which you would use in `scalg.score`, or you may specify the weights of each column in the corresponding order. In this example using `[1, 0, 0, 1]` or `[0, 1]` would make no difference.
+
+The output if you pass in source_data, columns and weights:
+
+    [[21999, 181, 0.49113300492610834],
+     [21540, 223, 1.5665024630541873],
+     [18900, 223, 2.0],
+     [24200, 223, 1.1297208538587848],
+     [24990, 223, 1.0]]
+
+The output if you pass in source_data, columns, weights and "scores":
+
+    [0.49113300492610834, 1.5665024630541873, 2.0, 1.1297208538587848, 1.0]
+
+The output if you pass in source_data, columns, weights and "score_lists":
+
+    [[0.49113300492610834, 0.5665024630541872, 1.0, 0.12972085385878485, 0.0],
+     [0.0, 1.0, 1.0, 1.0, 1.0]]
