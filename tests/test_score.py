@@ -5,7 +5,7 @@ parentdir = os.path.dirname(currentdir)
 sys.path.insert(0,parentdir) 
 
 import unittest
-from scalg import score
+from scalg.scalg import score
 
 DATA = [[2016 ,21999 ,62000  ,181],
         [2013 ,21540 ,89000  ,223],

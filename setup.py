@@ -9,7 +9,7 @@ def readme():
 
 setup(
     name="scalg",
-    version="0.1.2",
+    version="0.1.3",
     description="Analyse data file using a range based procentual proximity algorithm and calculate the linear maximum likelihood estimation.",
     long_description=readme(),
     long_description_content_type="text/markdown",
