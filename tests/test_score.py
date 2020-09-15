@@ -1,6 +1,6 @@
 
 import unittest
-import scalg.scalg
+from scalg import score
 
 DATA = [[2016 ,21999 ,62000  ,181],
         [2013 ,21540 ,89000  ,223],
@@ -10,10 +10,10 @@ DATA = [[2016 ,21999 ,62000  ,181],
 
 class SE(unittest.TestCase):
     def test_score_default(self):
-        scalg.scalg.score(DATA, [1, 0, 0, 1])
+        score(DATA, [1, 0, 0, 1])
 
     def test_score_scores(self):
-        scalg.scalg.score(DATA, [1, 0, 0, 1], 'scores')
+        score(DATA, [1, 0, 0, 1], 'scores')
 
     def test_score_score_lists(self):
-        scalg.scalg.score(DATA, [1, 0, 0, 1], 'score_lists')
+        score(DATA, [1, 0, 0, 1], 'score_lists')
