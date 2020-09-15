@@ -50,17 +50,10 @@ Here you may use the same weights which you would use in `scalg.score`, or you m
 
 The output if you pass in source_data, columns and weights:
 
-    [[21999, 181, 0.49113300492610834],
-     [21540, 223, 1.5665024630541873],
-     [18900, 223, 2.0],
-     [24200, 223, 1.1297208538587848],
-     [24990, 223, 1.0]]
+    [[2016, 21999, 62000, 181, 1.4911330049261085],
+     [2013, 21540, 89000, 223, 0.5665024630541872],
+     [2015, 18900, 100000, 223, 1.6666666666666665],
+     [2013, 24200, 115527, 223, 0.12972085385878485],
+     [2016, 24990, 47300, 223, 1.0]]
 
-The output if you pass in source_data, columns, weights and "scores":
-
-    [0.49113300492610834, 1.5665024630541873, 2.0, 1.1297208538587848, 1.0]
-
-The output if you pass in source_data, columns, weights and "score_lists":
-
-    [[0.49113300492610834, 0.5665024630541872, 1.0, 0.12972085385878485, 0.0],
-     [0.0, 1.0, 1.0, 1.0, 1.0]]
+The score was computet only based on columns 0 and 1.
