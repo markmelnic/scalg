@@ -16,9 +16,3 @@ DATA = [[2016 ,21999 ,62000  ,181],
 class SEC(unittest.TestCase):
     def test_score_columns(self):
         score_columns(DATA, [1, 3], [1, 0, 0, 1])
-
-    def test_score_columns_scores(self):
-        score_columns(DATA, [1, 3], [1, 0, 0, 1], 'scores')
-
-    def test_score_columns_score_lists(self):
-        score_columns(DATA, [1, 3], [1, 0, 0, 1], 'score_lists')
