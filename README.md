@@ -7,7 +7,7 @@ This algorithm works based on a percentual range proximity principle. Initially 
 
     pip install scalg
 
-As of __14 september 2020__ it contains two methods (`score` and `score_columns`) which will be described and demonstrated in the examples below.
+As of __15 september 2020__ it contains two methods (`score` and `score_columns`) which will be described and demonstrated in the examples below.
 
     import scalg
 
