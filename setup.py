@@ -6,10 +6,11 @@ def readme():
         README = f.read()
     return README
 
+exec(open('scalg/version.py').read())
 
 setup(
     name="scalg",
-    version="0.1.4",
+    version=__version__,
     description="Analyse data file using a range based procentual proximity algorithm and calculate the linear maximum likelihood estimation.",
     long_description=readme(),
     long_description_content_type="text/markdown",
