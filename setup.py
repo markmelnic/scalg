@@ -6,7 +6,8 @@ def readme():
         README = f.read()
     return README
 
-exec(open('scalg/version.py').read())
+# exec(open('scalg/version.py').read())
+from scalg.version import __version__
 
 setup(
     name="scalg",
