@@ -1,10 +1,11 @@
-
 from setuptools import setup, find_packages
 
+
 def readme():
-    with open('README.md') as f:
+    with open("README.md") as f:
         README = f.read()
     return README
+
 
 # exec(open('scalg/version.py').read())
 from scalg.version import __version__
@@ -20,21 +21,18 @@ setup(
     author_email="commerce.markmelnic@gmail.com",
     license="MIT",
     classifiers=[
-        'Intended Audience :: Developers',
-        'Natural Language :: English',
+        "Intended Audience :: Developers",
+        "Natural Language :: English",
         "License :: OSI Approved :: MIT License",
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8'
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
     ],
     packages=find_packages(exclude=["*.tests", "*.tests.*", "tests.*", "tests"]),
     zip_safe=False,
     include_package_data=True,
     install_requires=[],
-    entry_points={
-        "console_scripts": [
-        ]
-    },
+    entry_points={"console_scripts": []},
 )

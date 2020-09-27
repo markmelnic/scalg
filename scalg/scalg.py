@@ -1,5 +1,4 @@
-
-def score(source_data : list, weights : list, *args) -> list:
+def score(source_data: list, weights: list, *args) -> list:
     """Analyse data file using a range based procentual proximity
     algorithm and calculate the linear maximum likelihood estimation.
 
@@ -78,7 +77,8 @@ def score(source_data : list, weights : list, *args) -> list:
 
     return source_data
 
-def score_columns(source_data : list, columns : list, weights : list) -> list:
+
+def score_columns(source_data: list, columns: list, weights: list) -> list:
     """Analyse data file using a range based procentual proximity
     algorithm and calculate the linear maximum likelihood estimation.
 
@@ -103,7 +103,7 @@ def score_columns(source_data : list, columns : list, weights : list) -> list:
     if len(weights) > len(columns):
         weights = [weights[item] for item in columns]
 
-    for i, sc in enumerate(score(temp_data, weights, 'scores')):
+    for i, sc in enumerate(score(temp_data, weights, "scores")):
         source_data[i].append(sc)
 
     return source_data
