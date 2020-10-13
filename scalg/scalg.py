@@ -1,5 +1,5 @@
 def score(source_data: list, weights: list, *args) -> list:
-    """Analyse data file using a range based procentual proximity
+    """Analyse data file using a range based percentual proximity
     algorithm and calculate the linear maximum likelihood estimation.
 
     Args:
@@ -79,7 +79,7 @@ def score(source_data: list, weights: list, *args) -> list:
 
 
 def score_columns(source_data: list, columns: list, weights: list) -> list:
-    """Analyse data file using a range based procentual proximity
+    """Analyse data file using a range based percentual proximity
     algorithm and calculate the linear maximum likelihood estimation.
 
     Args:
