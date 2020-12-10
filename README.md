@@ -50,14 +50,18 @@ The output if you pass in source_data, weights and "score_lists":
      [0.7845427763202251  ,0.38880501854104677     ,0.22757852463101114      ,0.0]
      [0.0                 ,1.0                     ,1.0                      ,1.0]]
 
-### scalg.score_columns(source_data : list, columns : list, weights : list, *args) -> list
+This gives out the score of each element in the list compared to other elements, keeping it's position.
 
-Here you may use the same weights which you would use in `scalg.score`, or you may specify the weights of each column in the corresponding order. In this example using `[1, 0, 0, 1]` or `[0, 1]` would make no difference.
+### scalg.score_columns(source_data : list, columns : list, weights : list) -> list
+
+Here you may use the same weights which you would use in `scalg.score`, or you may specify the weights of each column in the corresponding order. In this example using the weights argument `[1, 0, 0, 1]` or `[0, 1]` would make no difference.
 
 The output if you pass in source_data, columns and weights:
 
 `scalg.score_columns(source_data, [0, 1], [1, 0, 0, 1])`
 
+     Scored columns            Scores for corresponding columns
+       0↓    1↓                  ↓
     [[2016 ,21999 ,62000  ,181 ,1.4911330049261085],
      [2013 ,21540 ,89000  ,223 ,0.5665024630541872],
      [2015 ,18900 ,100000 ,223 ,1.6666666666666665],
