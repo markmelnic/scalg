@@ -23,7 +23,7 @@ This will be the sample dataset used as source_data withing the examples with th
             4 [2013 ,24200 ,115527 ,223],
             5 [2016 ,24990 ,47300  ,223]]
 
-### scalg.score(source_data : list, weights : list, *args) -> list
+### Score Method
 
 The output if you pass in source_data and weights:
 
@@ -35,15 +35,15 @@ The output if you pass in source_data and weights:
      [2013, 24200, 115527, 223, 1.1297208538587848],
      [2016, 24990, 47300,  223, 3.0]]
 
-The output if you pass in source_data, weights and "scores":
+The output if you pass in source_data, weights and get_scores=True:
 
-`scalg.score(source_data, [1, 0, 0, 1], "scores")`
+`scalg.score(source_data, [1, 0, 0, 1], get_scores=True)`
 
     [2.2756757812463335, 1.9553074815952338, 2. 894245191297678, 1.1297208538587848, 3.0]
 
-The output if you pass in source_data, weights and "score_lists":
+The output if you pass in source_data, weights and get_score_lists=True:
 
-`scalg.score(source_data, [1, 0, 0, 1], "score_lists")`
+`scalg.score(source_data, [1, 0, 0, 1], get_score_lists=True)`
 
     [[1.0                 ,0.0, 0.6666666666666666 ,0.0                      ,1.0]
      [0.49113300492610834 ,0.5665024630541872      ,1.0, 0.12972085385878485 ,0.0]
@@ -52,7 +52,7 @@ The output if you pass in source_data, weights and "score_lists":
 
 This gives out the score of each element in the list compared to other elements, keeping it's position.
 
-### scalg.score_columns(source_data : list, columns : list, weights : list) -> list
+### Score Columns Method
 
 Here you may use the same weights which you would use in `scalg.score`, or you may specify the weights of each column in the corresponding order. In this example using the weights argument `[1, 0, 0, 1]` or `[0, 1]` would make no difference.
 
@@ -61,7 +61,7 @@ The output if you pass in source_data, columns and weights:
 `scalg.score_columns(source_data, [0, 1], [1, 0, 0, 1])`
 
      Scored columns            Scores for corresponding columns
-       0↓    1↓                  ↓
+       0|    1|                  |
     [[2016 ,21999 ,62000  ,181 ,1.4911330049261085],
      [2013 ,21540 ,89000  ,223 ,0.5665024630541872],
      [2015 ,18900 ,100000 ,223 ,1.6666666666666665],
