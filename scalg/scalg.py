@@ -1,5 +1,5 @@
-def score(source_data: list, weights: list, get_scores=False, get_score_lists=False) -> list:
-    """Analyse data file using a range based percentual proximity
+def score(source_data: list, weights: list, get_scores: bool = False, get_score_lists: bool = False) -> list:
+    """Analyse data using a range based percentual proximity
     algorithm and calculate the linear maximum likelihood estimation.
 
     Args:
@@ -19,13 +19,13 @@ def score(source_data: list, weights: list, get_scores=False, get_score_lists=Fa
         list: Source data with the score of the set appended at as the last element.
     """
 
-    # getting data
+    # formatting data struct
     data_lists = [[] for i in source_data]
     for item in source_data:
         for i, val in enumerate(item):
             data_lists[i].append(float(val))
 
-    # calculating price score
+    # compute scores
     score_lists = []
     for dlist, weight in zip(data_lists, weights):
         mind = min(dlist)
@@ -47,7 +47,7 @@ def score(source_data: list, weights: list, get_scores=False, get_score_lists=Fa
                     score.append(0)
 
         else:
-            raise ValueError("Invalid weight of %f provided" % (weight))
+            raise ValueError("Invalid weight of %f provided, must be either 0 or 1." % (weight))
 
         score_lists.append(score)
 
@@ -55,26 +55,28 @@ def score(source_data: list, weights: list, get_scores=False, get_score_lists=Fa
     final_scores = [0 for i in range(len(score_lists[0]))]
 
     # generate final scores
-    for i, slist in enumerate(score_lists):
-        for j, ele in enumerate(slist):
-            final_scores[j] = final_scores[j] + ele
+    for i, sub_list in enumerate(score_lists):
+        for j, item in enumerate(sub_list):
+            final_scores[j] = final_scores[j] + item
 
     # append scores to source data
-    for i, ele in enumerate(final_scores):
-        source_data[i].append(ele)
+    for i, item in enumerate(final_scores):
+        source_data[i].append(item)
 
     # return score lists
     if get_score_lists:
         return score_lists
-    # return only scores
+
+    # return only the scores
     if get_scores:
         return final_scores
+
     # return source data with appended scores
     return source_data
 
 
 def score_columns(source_data: list, columns: list, weights: list) -> list:
-    """Analyse data file using a range based percentual proximity
+    """Analyse data using a range based percentual proximity
     algorithm and calculate the linear maximum likelihood estimation.
 
     Args:
