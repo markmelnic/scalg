@@ -1,20 +1,11 @@
 from setuptools import setup, find_packages
-
-
-def readme():
-    with open("README.md") as f:
-        README = f.read()
-    return README
-
-
-# exec(open('scalg/version.py').read())
 from scalg.version import __version__
 
 setup(
     name="scalg",
     version=__version__,
     description="A Python list scoring algorithm. Analyse data file using a range based procentual proximity algorithm and calculate the linear maximum likelihood.",
-    long_description=readme(),
+    long_description=open("README.md", "r").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/markmelnic/Scoring-Algorithm",
     author="Mark Melnic",
