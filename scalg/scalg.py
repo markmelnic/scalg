@@ -26,12 +26,12 @@ def score(source_data: list, weights: list, get_scores: bool = False, get_score_
             data_lists[i].append(float(val))
 
     # compute scores
-    score_lists = []
+    score_lists: list[float] = []
     for dlist, weight in zip(data_lists, weights):
         mind = min(dlist)
         maxd = max(dlist)
 
-        score = []
+        score: list[int] = []
         if weight == 0:
             for item in dlist:
                 if not maxd - mind == 0:
