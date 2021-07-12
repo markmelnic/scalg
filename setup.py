@@ -7,9 +7,9 @@ setup(
     description="A Python list scoring algorithm. Analyse data file using a range based procentual proximity algorithm and calculate the linear maximum likelihood.",
     long_description=open("README.md", "r").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/markmelnic/Scoring-Algorithm",
+    url="https://github.com/markmelnic/scalg",
     author="Mark Melnic",
-    author_email="commerce.markmelnic@gmail.com",
+    author_email="me@markmelnic.com",
     license="MIT",
     python_requires='==3.*',
     classifiers=[
