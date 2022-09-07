@@ -1,6 +1,5 @@
 def score(source_data: list, weights: list, get_scores: bool = False, get_score_lists: bool = False) -> list:
-    """Analyse data using a range based percentual proximity
-    algorithm and calculate the linear maximum likelihood estimation.
+    """Analyse data using a range based procentual proximity algorithm.
 
     Args:
         source_data (list): Data set to process.
@@ -20,7 +19,7 @@ def score(source_data: list, weights: list, get_scores: bool = False, get_score_
     """
 
     # formatting data struct
-    data_lists = [[] for i in source_data]
+    data_lists: list[list] = [[] for i in source_data[0]]
     for item in source_data:
         for i, val in enumerate(item):
             data_lists[i].append(float(val))
@@ -76,8 +75,7 @@ def score(source_data: list, weights: list, get_scores: bool = False, get_score_
 
 
 def score_columns(source_data: list, columns: list, weights: list) -> list:
-    """Analyse data using a range based percentual proximity
-    algorithm and calculate the linear maximum likelihood estimation.
+    """Analyse data using a range based procentual proximity algorithm.
 
     Args:
         source_data (list): Data set to process.
